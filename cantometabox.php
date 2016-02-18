@@ -26,8 +26,21 @@ class CantoMetabox extends CTF_Addon{
         
         $this->add_js_tmlp_to_admin_footer();
 
-
+        add_action('admin_head', array($this,'print_window_js_var'));
+        add_action( 'admin_enqueue_scripts', array($this,'load_admin_js') );
         
+    }
+    
+    public function print_window_js_var (){
+        ?>
+        <script type="text/javascript">
+    		window.ctfmb_opts = {};
+    	</script>
+        <?php
+    }
+    
+    function load_admin_js(){
+        wp_enqueue_script( 'ctf-metabox', CTFMB_URL . 'assets/js/metabox.js', array('jquery', 'underscore'), '1.0', true );
     }
 
     private function include_files()
@@ -74,3 +87,20 @@ $test_metabox = array(
 );
 
 CantoMetabox::add_metabox($test_metabox);
+
+$test_metabox2 = array(
+	'id' => 'test_meta_box2',
+	'title' => __('Test Metabox2', 'textdomain'),
+	'post_type' => array('post', 'page'),
+	'options' => array(
+		array(
+			'id' => 'test_text_input2',
+			'label'    => __( 'Text Input2', 'mytheme' ),
+			'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+			'type'     => 'text',
+			'default' => 'Test Text',
+		)
+	)
+);
+
+CantoMetabox::add_metabox($test_metabox2);
