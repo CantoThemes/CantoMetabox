@@ -1,4 +1,4 @@
-(function( exports, $ ){
+(function( exports, $, CTF ){
     var ctfmb, ctfmb_class;
     
 
@@ -21,22 +21,33 @@
                     
                     _.each(metabox, function ( field, key, mbox_full ) {
                         var field_tmpl = wp.template( 'ctf-field-'+field.type );
+
+
                         
                         if (fields_container.data('saved')) {
-                            field.value = '';
+                            field.value = ctfmb_values[mb_id][field.id];
                         } else {
                             field.value = field.default;
                         }
                         field.link  = 'name="'+mb_id+'['+field.id+']"';
-                        field.toltip  = '';
-                        field.subtitle  = '';
-                        field.description  = '';
+                        // field.toltip  = '';
+                        // field.subtitle  = '';
+                        field.defaultValue  = field.default;
+
+                        var render = $(field_tmpl( field ));
+
+                        if (field.type == 'color') {
+                            CTF.colorPicker(render);
+                        };
+
                         
-                        fields_container.append(field_tmpl( field ));
+                        
+                        fields_container.append(render);
                     });
                 });
             }
         };
+
         
         
         //this.run();
@@ -50,4 +61,4 @@
     
     ctfmb.run();
     
-})( wp, jQuery );
+})( wp, jQuery, CTF_Core );

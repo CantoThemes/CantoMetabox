@@ -27,20 +27,22 @@ class CantoMetabox extends CTF_Addon{
         $this->add_js_tmlp_to_admin_footer();
 
         add_action('admin_head', array($this,'print_window_js_var'));
-        add_action( 'admin_enqueue_scripts', array($this,'load_admin_js') );
+        // add_action( 'admin_enqueue_scripts', array($this,'load_admin_js') );
         
     }
     
     public function print_window_js_var (){
         ?>
         <script type="text/javascript">
-    		window.ctfmb_opts = {};
+            window.ctfmb_opts = {};
+    		window.ctfmb_values = {};
     	</script>
         <?php
     }
     
     function load_admin_js(){
-        wp_enqueue_script( 'ctf-metabox', CTFMB_URL . 'assets/js/metabox.js', array('jquery', 'underscore'), '1.0', true );
+        parent::load_admin_js();
+        wp_enqueue_script( 'ctf-metabox', CTFMB_URL . 'assets/js/metabox.js', array('jquery', 'underscore', 'ctf-core-script'), '1.0', true );
     }
 
     private function include_files()
@@ -82,7 +84,21 @@ $test_metabox = array(
 			'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
 			'type'     => 'text',
 			'default' => 'Test Text',
-		)
+		),
+        array(
+            'id' => 'test_text_input3',
+            'label'    => __( 'Text Input 3', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'text',
+            'default' => 'Test Text',
+        ),
+        array(
+            'id' => 'test_text_input4',
+            'label'    => __( 'Text Input 4', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'text',
+            'default' => 'Test Text',
+        )
 	)
 );
 
@@ -94,12 +110,19 @@ $test_metabox2 = array(
 	'post_type' => array('post', 'page'),
 	'options' => array(
 		array(
-			'id' => 'test_text_input2',
-			'label'    => __( 'Text Input2', 'mytheme' ),
+			'id' => 'ctfif_tst_text',
+			'label'    => __( 'Text Input', 'mytheme' ),
 			'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
 			'type'     => 'text',
 			'default' => 'Test Text',
-		)
+		),
+        array(
+            'id' => 'ctfif_tst_',
+            'label'    => __( 'Color Input', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'color',
+            'default' => '#ff00ff',
+        )
 	)
 );
 
