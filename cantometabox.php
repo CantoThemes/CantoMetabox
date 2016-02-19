@@ -35,7 +35,8 @@ class CantoMetabox extends CTF_Addon{
         ?>
         <script type="text/javascript">
             window.ctfmb_opts = {};
-    		window.ctfmb_values = {};
+            window.ctfmb_values = {};
+    		window.ctf_fa_icons = <?php echo CTF_Help::get_icons_json(); ?>;
     	</script>
         <?php
     }
@@ -117,11 +118,32 @@ $test_metabox2 = array(
 			'default' => 'Test Text',
 		),
         array(
-            'id' => 'ctfif_tst_',
+            'id' => 'ctfif_tst_number',
+            'label'    => __( 'Number Input', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'number',
+            'default' => '50',
+        ),
+        array(
+            'id' => 'ctfif_tst_Icon',
+            'label'    => __( 'Icon Input', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'icon',
+            'default' => 'fa fa-cogs',
+        ),
+        array(
+            'id' => 'ctfif_tst_color',
             'label'    => __( 'Color Input', 'mytheme' ),
             'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
             'type'     => 'color',
             'default' => '#ff00ff',
+        ),
+        array(
+            'id' => 'ctfif_tst_rgba',
+            'label'    => __( 'RGBA Color Input', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'color_rgba',
+            'default' => 'rgba(25,56,58,0.65)',
         )
 	)
 );

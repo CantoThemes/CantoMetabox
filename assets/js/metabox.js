@@ -38,7 +38,13 @@
 
                         if (field.type == 'color') {
                             CTF.colorPicker(render);
-                        };
+                        } else if (field.type == 'color_rgba') {
+                            CTF.rgbaColorPicker(render);
+                        } else if (field.type == 'number') {
+                            CTF.numberInput(render);
+                        } else if (field.type == 'icon') {
+                            CTF.iconInput(render);
+                        }
 
                         
                         
