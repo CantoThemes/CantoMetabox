@@ -117,6 +117,25 @@ $test_metabox2 = array(
 			'type'     => 'text',
 			'default' => 'Test Text',
 		),
+		array(
+			'id' => 'ctfif_tst_textarea',
+			'label'    => __( 'Textarea Input', 'mytheme' ),
+			'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+			'type'     => 'textarea',
+			'default' => 'Test Text',
+		),
+		array(
+			'id' => 'ctfif_tst_select',
+			'label'    => __( 'Select Input', 'mytheme' ),
+			'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+			'type'     => 'select',
+			'default' => 'test2',
+			'choices' => array(
+				'test1' => 'Test 1',
+				'test2' => 'Test 2',
+				'test3' => 'Test 3'
+			)
+		),
         array(
             'id' => 'ctfif_tst_number',
             'label'    => __( 'Number Input', 'mytheme' ),
