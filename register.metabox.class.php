@@ -7,11 +7,16 @@ class CTF_RMB
 
     private $metabox = array();
 	private $_metabox_nonce = '';
+    private $dimension_ids = array();
 	
 	function __construct( $metabox )
 	{
 		$this->metabox = $metabox;
         $this->_metabox_nonce = $metabox['id'].'_nonce';
+
+        $this->set_dimension_input_ids( $metabox['options'] );
+
+
 		add_action( 'add_meta_boxes', array($this, 'ctf_register_metabox') );
 		add_action( 'save_post', array($this, 'ctf_save_metabox_data') );
 	}
@@ -28,6 +33,7 @@ class CTF_RMB
             wp_nonce_field( $this->_metabox_nonce.'_box', $this->_metabox_nonce );
 
             $values = get_post_meta( $post->ID, $this->metabox['id'], true );
+            var_dump($values);
     		?>
     		<div class="ctf-mb_container ctf-fc" id="ctf-metabox-<?php echo $this->metabox['id']; ?>" data-saved="<?php echo ($this->is_saved() ? 1 : 0); ?>"></div>
     		<script type="text/javascript">
@@ -76,9 +82,29 @@ class CTF_RMB
         // Sanitize the user input.
     	$metabox_data = $_POST[$this->metabox['id']];
 
-        // var_dump($metabox_data);
+        if (count($this->dimension_ids)) {
+            foreach ( $this->dimension_ids as $dimension_id ) {
+                $dvals = $metabox_data[$dimension_id];
+                $metabox_data[$dimension_id] = $dvals[0].$dvals[1];
+            }
+        }
+        
+
+        // var_dump($metabox_data); die();
 
         update_post_meta( $post_id, $this->metabox['id'], $metabox_data );
+    }
+
+    public function set_dimension_input_ids( $options )
+    {
+        if (count($options)) {
+            foreach ($options as $option) {
+                if ( $option['type'] == 'dimension' ) {
+                    $this->dimension_ids[] = $option['id'];
+                }
+            }
+        }
+        
     }
     
     public function is_saved()
