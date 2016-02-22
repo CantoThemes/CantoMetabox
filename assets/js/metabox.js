@@ -76,6 +76,8 @@
                             CTF.dimensionInput(render);
                         } else if (field.type == 'range') {
                             CTF.rangeInput(render);
+                        } else if (field.type == 'image') {
+                            CTF.imageInput(render);
                         }
 
                         

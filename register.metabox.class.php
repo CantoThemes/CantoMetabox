@@ -8,6 +8,7 @@ class CTF_RMB
     private $metabox = array();
 	private $_metabox_nonce = '';
     private $dimension_ids = array();
+    private $image_ids = array();
 	
 	function __construct( $metabox )
 	{
@@ -15,6 +16,8 @@ class CTF_RMB
         $this->_metabox_nonce = $metabox['id'].'_nonce';
 
         $this->set_dimension_input_ids( $metabox['options'] );
+        
+        $this->set_image_input_ids( $metabox['options'] );
 
 
 		add_action( 'add_meta_boxes', array($this, 'ctf_register_metabox') );
@@ -89,6 +92,19 @@ class CTF_RMB
             }
         }
         
+        if (count($this->image_ids)) {
+            foreach ( $this->image_ids as $image_id ) {
+                $dvals = $metabox_data[$image_id];
+                
+                if( !empty($dvals) ){
+                    $metabox_data[$image_id] = json_decode( stripslashes($dvals), true);
+                } else {
+                    $metabox_data[$image_id] = array();
+                }
+                
+            }
+        }
+        
 
         // var_dump($metabox_data); die();
 
@@ -101,6 +117,18 @@ class CTF_RMB
             foreach ($options as $option) {
                 if ( $option['type'] == 'dimension' ) {
                     $this->dimension_ids[] = $option['id'];
+                }
+            }
+        }
+        
+    }
+    
+    public function set_image_input_ids( $options )
+    {
+        if (count($options)) {
+            foreach ($options as $option) {
+                if ( $option['type'] == 'image' ) {
+                    $this->image_ids[] = $option['id'];
                 }
             }
         }

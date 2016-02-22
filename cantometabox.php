@@ -273,6 +273,32 @@ $test_metabox2 = array(
             'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
             'type'     => 'color_rgba',
             'default' => 'rgba(25,56,58,0.65)',
+        ),
+        array(
+            'id' => 'ctfif_tst_font_style',
+            'label'    => __( 'Font Style Input', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'font_style',
+            'default' => array(
+				'bold' => 'on',
+				'italic' => 'off',
+				'underline' => 'off',
+				'strikethrough' => 'on',
+			),
+        ),
+        array(
+            'id' => 'ctfif_tst_text_align',
+            'label'    => __( 'Text Align Input', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'text_align',
+            'default' => 'left',
+        ),
+        array(
+            'id' => 'ctfif_tst_image',
+            'label'    => __( 'Image Input', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'image',
+            'default' => array(),
         )
 	)
 );
