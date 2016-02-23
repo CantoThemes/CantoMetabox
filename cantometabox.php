@@ -37,6 +37,7 @@ class CantoMetabox extends CTF_Addon{
             window.ctfmb_values = {};
             window.isAddon = true;
     		window.ctf_fa_icons = <?php echo CTF_Help::get_icons_json(); ?>;
+    		window.ctf_google_fonts = <?php echo CTF_Help::get_google_font_json(); ?>;
     	</script>
         <?php
     }
@@ -118,7 +119,7 @@ $test_metabox2 = array(
 			'default' => 'Test Text',
 		),
         array(
-            'id' => 'ctfif_tst_text',
+            'id' => 'ctfif_tst_email',
             'label'    => __( 'Email Input', 'mytheme' ),
             'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
             'type'     => 'email',
@@ -298,6 +299,13 @@ $test_metabox2 = array(
             'label'    => __( 'Image Input', 'mytheme' ),
             'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
             'type'     => 'image',
+            'default' => array(),
+        ),
+        array(
+            'id' => 'ctfif_tst_font',
+            'label'    => __( 'Google Font Input', 'mytheme' ),
+            'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+            'type'     => 'google_font',
             'default' => array(),
         )
 	)

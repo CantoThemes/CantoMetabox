@@ -9,6 +9,7 @@ class CTF_RMB
 	private $_metabox_nonce = '';
     private $dimension_ids = array();
     private $image_ids = array();
+    private $google_font_ids = array();
 	
 	function __construct( $metabox )
 	{
@@ -18,6 +19,8 @@ class CTF_RMB
         $this->set_dimension_input_ids( $metabox['options'] );
         
         $this->set_image_input_ids( $metabox['options'] );
+        
+        $this->set_google_font_input_ids( $metabox['options'] );
 
 
 		add_action( 'add_meta_boxes', array($this, 'ctf_register_metabox') );
@@ -105,6 +108,28 @@ class CTF_RMB
             }
         }
         
+        if (count($this->google_font_ids)) {
+            foreach ( $this->google_font_ids as $google_font_id ) {
+                $dvals = $metabox_data[$google_font_id];
+                
+                
+                
+                if( !empty($dvals) ){
+                    $jsonval = json_decode( stripslashes($dvals), true);
+                    
+                    
+                    if (!is_array($jsonval)) {
+                        $jsonval = json_decode( stripslashes($jsonval), true);
+                    }
+                    
+                    $metabox_data[$google_font_id] = $jsonval;
+                } else {
+                    $metabox_data[$google_font_id] = array();
+                }
+                
+            }
+        }
+        
 
         // var_dump($metabox_data); die();
 
@@ -129,6 +154,18 @@ class CTF_RMB
             foreach ($options as $option) {
                 if ( $option['type'] == 'image' ) {
                     $this->image_ids[] = $option['id'];
+                }
+            }
+        }
+        
+    }
+    
+    public function set_google_font_input_ids( $options )
+    {
+        if (count($options)) {
+            foreach ($options as $option) {
+                if ( $option['type'] == 'google_font' ) {
+                    $this->google_font_ids[] = $option['id'];
                 }
             }
         }
