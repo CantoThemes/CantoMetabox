@@ -31,7 +31,11 @@
 
                         if ( fields_container.data('saved') ) {
                             if ( ! _.isUndefined(ctfmb_values[mb_id][field.id]) ) {
-                                field.value = ctfmb_values[mb_id][field.id];
+                                if ( _.isNull(ctfmb_values[mb_id][field.id]) ) {
+                                    field.value = {};
+                                } else {
+                                    field.value = ctfmb_values[mb_id][field.id];
+                                }
                             }
                         } else {
                             field.value = field.default;
@@ -51,6 +55,7 @@
                             (field.type == 'checkbox') ||
                             (field.type == 'checkbox_image') ||
                             (field.type == 'checkbox_button') ||
+                            (field.type == 'font_style') ||
                             (field.type == 'dimension')
                             ) {
                             field.link  = 'name="'+mb_id+'['+field.id+'][]"';
@@ -64,9 +69,13 @@
                         // field.subtitle  = '';
                         field.defaultValue  = field.default;
 
-                        console.log(field.link);
+                        // console.log(field.link);
 
                         var render = $(field_tmpl( field ));
+
+                        if (field.type == 'editor') {
+                            console.log(field_tmpl( field ));
+                        }
 
                         if (field.type == 'color') {
                             CTF.colorPicker(render);
@@ -88,6 +97,10 @@
                             CTF.imageInput(render);
                         } else if (field.type == 'google_font') {
                             CTF.googleFontInput(render);
+                        } else if (field.type == 'editor') {
+                            setTimeout(function () {
+                                CTF.editorInput( render, field );
+                            }, 300);
                         }
 
                         
