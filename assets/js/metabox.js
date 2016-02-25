@@ -6,7 +6,7 @@
         
         var mb = this;
         
-        
+        mb.inputs = {};
         
         mb.run = function () {
             
@@ -22,6 +22,8 @@
             if( ! _.isEmpty(ctfmb_opts) ){
                 _.each(ctfmb_opts, function ( metabox, mb_id, mb_full ) {
                     var fields_container = $('#ctf-metabox-'+mb_id);
+
+                    mb.inputs[mb_id] = {};
                     
                     _.each(metabox, function ( field, key, mbox_full ) {
                         var field_tmpl = wp.template( 'ctf-field-'+field.type );
@@ -71,41 +73,70 @@
 
                         // console.log(field.link);
 
-                        var render = $(field_tmpl( field ));
-
-
-                        if (field.type == 'color') {
-                            CTF.colorPicker(render);
-                        } else if (field.type == 'color_rgba') {
-                            CTF.rgbaColorPicker(render);
-                        } else if (field.type == 'number') {
-                            CTF.numberInput(render);
-                        } else if (field.type == 'icon') {
-                            CTF.iconInput(render);
-                        } else if (field.type == 'select') {
-                            CTF.selectInput(render);
-                        } else if (field.type == 'text_multi') {
-                            CTF.textMultiInput(render);
-                        } else if (field.type == 'dimension') {
-                            CTF.dimensionInput(render);
-                        } else if (field.type == 'range') {
-                            CTF.rangeInput(render);
-                        } else if (field.type == 'image') {
-                            CTF.imageInput(render);
-                        } else if (field.type == 'google_font') {
-                            CTF.googleFontInput(render);
-                        } else if (field.type == 'editor') {
-                            setTimeout(function () {
-                                CTF.editorInput( render, field );
-                            }, 300);
-                            
-                        }
+                        var fldHTML = field_tmpl( field ),
+                            render = $(fldHTML);
 
                         
+                        mb.inputs[mb_id][field.id] = {};
+
+                        mb.inputs[mb_id][field.id]['html'] = fldHTML;
+                        mb.inputs[mb_id][field.id]['object'] = render;
+                        mb.inputs[mb_id][field.id]['settings'] = field;
+
                         
+
                         fields_container.append(render);
+
+                        
+                        
+                        
                     });
                 });
+            }
+
+            mb.ready();
+        };
+
+        mb.ready = function () {
+            if( ! _.isEmpty(mb.inputs) ){
+                _.each(mb.inputs, function ( metabox, mb_id, mb_full ) {
+                    if( ! _.isEmpty(metabox) ){
+                        _.each(metabox, function ( inputs, input_id, mb_full ) {
+                            mb.initInputs(inputs.object, inputs.settings);
+                        });
+                    }
+                    
+                });
+            }
+        };
+
+
+        mb.initInputs = function  ( render, field ) {
+            if (field.type == 'color') {
+                CTF.colorPicker(render);
+            } else if (field.type == 'color_rgba') {
+                CTF.rgbaColorPicker(render);
+            } else if (field.type == 'number') {
+                CTF.numberInput(render);
+            } else if (field.type == 'icon') {
+                CTF.iconInput(render);
+            } else if (field.type == 'select') {
+                CTF.selectInput(render);
+            } else if (field.type == 'text_multi') {
+                CTF.textMultiInput(render);
+            } else if (field.type == 'dimension') {
+                CTF.dimensionInput(render);
+            } else if (field.type == 'range') {
+                CTF.rangeInput(render);
+            } else if (field.type == 'image') {
+                CTF.imageInput(render);
+            } else if (field.type == 'google_font') {
+                CTF.googleFontInput(render);
+            } else if (field.type == 'editor') {
+                setTimeout(function () {
+                    CTF.editorInput( render, field );
+                }, 300);
+                
             }
         };
 
@@ -118,14 +149,14 @@
         
     };
     
-    setTimeout(function  () {
-        ctfmb = ctfmb_class();
-        ctfmb.run();
-    }, 300);
+    // setTimeout(function  () {
+    //     ctfmb = ctfmb_class();
+    //     ctfmb.run();
+    // }, 300);
     
     /*$(document).ready(function () {*/
-        // ctfmb = ctfmb_class();
-        // ctfmb.run();
+        ctfmb = ctfmb_class();
+        ctfmb.run();
     /*});*/
     
     
