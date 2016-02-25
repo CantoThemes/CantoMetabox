@@ -73,9 +73,6 @@
 
                         var render = $(field_tmpl( field ));
 
-                        if (field.type == 'editor') {
-                            console.log(field_tmpl( field ));
-                        }
 
                         if (field.type == 'color') {
                             CTF.colorPicker(render);
@@ -100,7 +97,8 @@
                         } else if (field.type == 'editor') {
                             setTimeout(function () {
                                 CTF.editorInput( render, field );
-                            }, 300);
+                            }, 1000);
+                            
                         }
 
                         
