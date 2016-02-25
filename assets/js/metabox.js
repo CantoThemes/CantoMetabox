@@ -97,7 +97,7 @@
                         } else if (field.type == 'editor') {
                             setTimeout(function () {
                                 CTF.editorInput( render, field );
-                            }, 1000);
+                            }, 300);
                             
                         }
 
