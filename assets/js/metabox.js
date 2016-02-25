@@ -118,8 +118,15 @@
         
     };
     
-    ctfmb = ctfmb_class();
+    setTimeout(function  () {
+        ctfmb = ctfmb_class();
+        ctfmb.run();
+    }, 300);
     
-    ctfmb.run();
+    /*$(document).ready(function () {*/
+        // ctfmb = ctfmb_class();
+        // ctfmb.run();
+    /*});*/
+    
     
 })( wp, jQuery, CTF_Core );
