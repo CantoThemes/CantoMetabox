@@ -1,4 +1,7 @@
 (function( exports, $, CTF ){
+    
+
+
     var ctfmb, ctfmb_class;
     
 
@@ -133,9 +136,9 @@
             } else if (field.type == 'google_font') {
                 CTF.googleFontInput(render);
             } else if (field.type == 'editor') {
-                setTimeout(function () {
+                /*setTimeout(function () {*/
                     CTF.editorInput( render, field );
-                }, 300);
+                /*}, 300);*/
                 
             }
         };
@@ -155,9 +158,18 @@
     // }, 300);
     
     /*$(document).ready(function () {*/
-        ctfmb = ctfmb_class();
-        ctfmb.run();
+        // ctfmb = ctfmb_class();
+        // ctfmb.run();
     /*});*/
+
+    "use strict";
+
+    $(window).load(function () {
+        setTimeout(function () {
+            ctfmb = ctfmb_class();
+            ctfmb.run();
+        }, 300);
+    });
     
     
 })( wp, jQuery, CTF_Core );

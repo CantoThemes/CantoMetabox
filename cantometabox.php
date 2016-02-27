@@ -12,9 +12,9 @@
 define('CTFMB_PATH', plugin_dir_path( __FILE__ ));
 define('CTFMB_URL', plugin_dir_url( __FILE__ ));
 
-add_action( 'init', 'init_fun_mb', 10 );
+add_action( 'init', 'ctf_addon_mb_addon', 10 );
 
-function init_fun_mb()
+function ctf_addon_mb_addon()
 {
     require_once CTFMB_PATH .'/cantometabox.addon.class.php';
 }
