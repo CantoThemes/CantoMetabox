@@ -39,7 +39,6 @@ class CTF_RMB
             wp_nonce_field( $this->_metabox_nonce.'_box', $this->_metabox_nonce );
 
             $values = get_post_meta( $post->ID, $this->metabox['id'], true );
-            var_dump($values);
     		?>
     		<div class="ctf-mb_container ctf-fc" id="ctf-metabox-<?php echo $this->metabox['id']; ?>" data-saved="<?php echo ($this->is_saved() ? 1 : 0); ?>"></div>
     		<script type="text/javascript">
@@ -131,7 +130,6 @@ class CTF_RMB
         }
         
 
-        // var_dump($metabox_data); die();
 
         update_post_meta( $post_id, $this->metabox['id'], $metabox_data );
     }

@@ -54,7 +54,6 @@
                             field.choices = field.choices;
                         }
 
-                        // console.log(field.value);
                         
                         if ( 
                             (field.type == 'checkbox') ||
@@ -70,11 +69,9 @@
                         } else {
                             field.link  = 'name="'+mb_id+'['+field.id+']"';
                         }
-                        // field.toltip  = '';
-                        // field.subtitle  = '';
+
                         field.defaultValue  = field.default;
 
-                        // console.log(field.link);
 
                         var fldHTML = field_tmpl( field ),
                             render = $(fldHTML);
@@ -139,6 +136,8 @@
                 /*setTimeout(function () {*/
                     CTF.editorInput( render, field );
                 /*}, 300);*/
+
+                
                 
             }
         };
