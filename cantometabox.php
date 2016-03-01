@@ -23,7 +23,7 @@ if ( ! class_exists('CTFMB') ) {
     {
     
         /**
-         * @var         EDD_CT_TwoCheckOut $instance The one true EDD_CT_TwoCheckOut
+         * @var         CTFMB $instance The one true CTFMB
          * @since       1.0.0
          */
         private static $instance;
@@ -34,7 +34,7 @@ if ( ! class_exists('CTFMB') ) {
          *
          * @access      public
          * @since       1.0.0
-         * @return      object self::$instance The one true EDD_CT_TwoCheckOut
+         * @return      object self::$instance The one true CTFMB
          */
         public static function instance() {
             if( !self::$instance ) {
