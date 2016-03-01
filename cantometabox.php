@@ -8,6 +8,7 @@
  * Author URI: https://www.cantothemes.com
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 define('CTFMB_PATH', plugin_dir_path( __FILE__ ));
 define('CTFMB_URL', plugin_dir_url( __FILE__ ));
