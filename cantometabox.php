@@ -12,22 +12,57 @@
 define('CTFMB_PATH', plugin_dir_path( __FILE__ ));
 define('CTFMB_URL', plugin_dir_url( __FILE__ ));
 
-add_action( 'init', 'ctf_addon_mb_addon', 10 );
 
-function ctf_addon_mb_addon()
-{
-    require_once CTFMB_PATH .'/cantometabox.addon.class.php';
+
+
+if ( ! class_exists('CTFMB') ) {
+    
+
+    class CTFMB
+    {
+    
+        /**
+         * @var         EDD_CT_TwoCheckOut $instance The one true EDD_CT_TwoCheckOut
+         * @since       1.0.0
+         */
+        private static $instance;
+
+
+        /**
+         * Get active instance
+         *
+         * @access      public
+         * @since       1.0.0
+         * @return      object self::$instance The one true EDD_CT_TwoCheckOut
+         */
+        public static function instance() {
+            if( !self::$instance ) {
+                self::$instance = new CTFMB();
+                self::$instance->includes();
+
+                do_action( 'ctf_add_metabox' );
+            }
+
+            return self::$instance;
+        }
+
+        private function includes() {
+            require_once CTFMB_PATH .'/cantometabox.addon.class.php';
+        }
+    }
 }
 
+function CTF_MetaBox_Register_Addon() {
+    if( class_exists( 'CTF_Init' ) ) {
+        return CTFMB::instance();
+    }
+}
+add_action( 'plugins_loaded', 'CTF_MetaBox_Register_Addon' );
 
-
-
-
-
-add_action( 'init', 'init_fun_mb_tst', 99 );
-
-function init_fun_mb_tst()
+add_action( 'ctf_add_metabox', 'test_metabox' );
+function test_metabox()
 {
+    
     if (class_exists('CantoMetabox')) {
 
         $test_metabox2 = array(
@@ -244,7 +279,6 @@ function init_fun_mb_tst()
 
         CantoMetabox::add_metabox($test_metabox2);
     }
-
 }
 
 
