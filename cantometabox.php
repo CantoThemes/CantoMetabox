@@ -269,6 +269,13 @@ function test_metabox()
                     'default' => array(),
                 ),
                 array(
+                    'id' => 'ctfif_tst_image_multi',
+                    'label'    => __( 'Gallery Input', 'mytheme' ),
+                    'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),
+                    'type'     => 'image_multi',
+                    // 'default' => array(),
+                ),
+                array(
                     'id' => 'ctfif_tst_font',
                     'label'    => __( 'Google Font Input', 'mytheme' ),
                     'subtitle'    => __( 'Lorem ipsum dolor sit amet', 'mytheme' ),

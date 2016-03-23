@@ -9,6 +9,7 @@ class CTF_RMB
 	private $_metabox_nonce = '';
     private $dimension_ids = array();
     private $image_ids = array();
+    private $image_multi_ids = array();
     private $google_font_ids = array();
 	
 	function __construct( $metabox )
@@ -19,6 +20,8 @@ class CTF_RMB
         $this->set_dimension_input_ids( $metabox['options'] );
         
         $this->set_image_input_ids( $metabox['options'] );
+        
+        $this->set_multi_image_input_ids( $metabox['options'] );
         
         $this->set_google_font_input_ids( $metabox['options'] );
 
@@ -107,6 +110,27 @@ class CTF_RMB
             }
         }
         
+        if (count($this->image_multi_ids)) {
+            foreach ( $this->image_multi_ids as $image_id ) {
+                $dvals = $metabox_data[$image_id];
+                
+                
+                
+                if( !empty($dvals) ){
+                    $jsonval = json_decode( stripslashes($dvals), true);
+                    
+                    if (!is_array($jsonval)) {
+                        $jsonval = json_decode( stripslashes($jsonval), true);
+                    }
+                    
+                    $metabox_data[$image_id] = $jsonval;
+                } else {
+                    $metabox_data[$image_id] = array();
+                }
+                
+            }
+        }
+        
         if (count($this->google_font_ids)) {
             foreach ( $this->google_font_ids as $google_font_id ) {
                 $dvals = $metabox_data[$google_font_id];
@@ -152,6 +176,18 @@ class CTF_RMB
             foreach ($options as $option) {
                 if ( $option['type'] == 'image' ) {
                     $this->image_ids[] = $option['id'];
+                }
+            }
+        }
+        
+    }
+    
+    public function set_multi_image_input_ids( $options )
+    {
+        if (count($options)) {
+            foreach ($options as $option) {
+                if ( $option['type'] == 'image_multi' ) {
+                    $this->image_multi_ids[] = $option['id'];
                 }
             }
         }

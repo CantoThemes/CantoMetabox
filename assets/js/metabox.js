@@ -130,6 +130,8 @@
                 CTF.rangeInput(render);
             } else if (field.type == 'image') {
                 CTF.imageInput(render);
+            } else if (field.type == 'image_multi') {
+                CTF.imageMultiInput(render);
             } else if (field.type == 'google_font') {
                 CTF.googleFontInput(render);
             } else if (field.type == 'editor') {
