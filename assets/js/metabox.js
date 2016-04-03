@@ -1,6 +1,13 @@
 (function( exports, $, CTF ){
 
     CTF_Core.CTF_Metabox = CTF_Core.Opts.extend({
+        initialize: function ( container, args ){
+	    	this.inputArgs = args;
+	    	this.container = container;
+	    	this.containerObj = $('#ctf-metabox-'+container);;
+
+	    	this.renderContent();
+	    },
         getNameAttr: function ( type, id ){
             var nameAttrValue = this.container+'['+id+']';
 
