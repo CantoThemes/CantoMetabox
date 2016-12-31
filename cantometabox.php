@@ -1,21 +1,10 @@
 <?php
-/**
- * Plugin Name: CantoMetabox
- * Plugin URI: https://www.cantothemes.com
- * Description: A metabox addon for CantoFramework
- * Version: 1.0-alpha
- * Author: CantoThemes
- * Author URI: https://www.cantothemes.com
- */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! defined( 'CTFMB_PATH' ) || ! defined( 'CTFMB_URL' ) ){
     return;
 }
-
-
-
 
 if ( ! class_exists('CTFMB') ) {
     
