@@ -43,9 +43,12 @@ if ( ! class_exists('CTFMB') ) {
     }
 }
 
-function CTF_MetaBox_Register_Addon() {
-    if( class_exists( 'CTF_Init' ) ) {
-        return CTFMB::instance();
-    }
+if(!function_exists('CTF_MetaBox_Register_Addon')){
+	function CTF_MetaBox_Register_Addon() {
+		if( class_exists( 'CTF_Init' ) ) {
+			return CTFMB::instance();
+		}
+	}
+	
+	add_action( 'plugins_loaded', 'CTF_MetaBox_Register_Addon' );
 }
-add_action( 'plugins_loaded', 'CTF_MetaBox_Register_Addon' );
